@@ -1,15 +1,15 @@
 <?php
 
 require_once("lib/database.php");
-require_once("lib/artikel.php");
+require_once("lib/product.php");
 
 /// INIT
-$db = new database();
-$art = new artikel($db->getConnection());
+$db = new Database();
+$product = new Product($db->getConnection());
 
 
 /// VERWERK 
-$data = $art->selecteerArtikel(8);
+//$data = $product->selectProduct(8);
 
 /// RETURN
-var_dump($data);
+var_dump("<pre>",  $db, "</pre>");
