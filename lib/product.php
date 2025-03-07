@@ -2,7 +2,6 @@
 
 class Product {
 
-    // Private so it doesn't get overriden by accident.
     private $connection;
 
     public $product_id;
@@ -25,7 +24,7 @@ class Product {
     }
   
     public function selectProductByProductId($product_id) {
-        $sql = "SELECT * FROM product WHERE id = $product_id";
+        $sql = "SELECT * FROM `product` WHERE `id` = $product_id";
         
         $result = mysqli_query($this->connection, $sql);
         $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
