@@ -29,7 +29,7 @@ class Product {
         $result = mysqli_query($this->connection, $sql);
         $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-        return($product);
+        return $product;
     }
 }
 
