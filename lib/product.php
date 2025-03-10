@@ -5,6 +5,7 @@ class Product {
     private $connection;
 
     public function __construct($connection) {
+        $this->connection = $connection;
     }
   
     public function selectProductByProductId($product_id) {
