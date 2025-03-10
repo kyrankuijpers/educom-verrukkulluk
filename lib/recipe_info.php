@@ -3,9 +3,12 @@
 class RecipeInfo {
 
     private $connection;
+    private $user;
 
-    public function __construct($connection) {
+    public function __construct($connection, $user) {
+       
         $this->connection = $connection;
+        $this->user = $user;
     }
 
     public function selectRecipeInfo($recipe_id, $record_type) {
@@ -14,27 +17,27 @@ class RecipeInfo {
         $result = mysqli_query($this->connection, $sql);
         
         $recipe_info = [];
-        
-        // If we get comments we also need to know user names and profile images.
-        if($record_type == 'C') {
-            $user = new User($this->connection);
-            $user_id = '';   
-        }
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             
-            if($record_type == 'C'){
-                $user_id = $row['user_id'];                
-                $user_info = $user->selectUserByUserId($user_id);
-
-                $row['user_name'] = $user_info['user_name'];
-                $row['user_img'] = $user_info['img'];
-                
+            if($record_type == 'C') {                
                 $user_id = '';
-            }            
-            $recipe_info[] = $row;
+                $user_info = [];
+                
+                $user_id = $row['user_id'];                
+                $user_info = $this->getUser($user_id);
+
+                $recipe_info[] = [...$row, ...$user_info];
+            }
+            else {
+                $recipe_info[] = $row;
+            }        
         }
         return $recipe_info;
+    }
+
+    private function getUser($user_id) {
+        return $this->user->selectUserByUserId($user_id);
     }
 
     public function addFavorite($recipe_id, $user_id) {
@@ -52,6 +55,7 @@ class RecipeInfo {
 
         return $result;
     }
+
 }
 
 ?>
