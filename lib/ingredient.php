@@ -3,18 +3,37 @@
 class Ingredient {
 
     private $connection;
+    private $product;
 
-    public function __construct($connection) {
+    public function __construct($connection, $product) {
+
         $this->connection = $connection;
+        $this->product = $product;
+        
     }
 
-    public function selectIngredientById($ingredient_id) {
-        $sql = "SELECT * FROM `ingredient` WHERE `id` = $ingredient_id";
+    public function selectIngredientByRecipeId($recipe_id) {
+        $ingredient_and_product = [];
+        
+        $sql = "SELECT * FROM `ingredient` WHERE `recipe_id` = $recipe_id;";
 
         $result = mysqli_query($this->connection, $sql);
-        $ingredient = mysqli_fetch_array($result, MYSQLI_ASSOC);
         
-        return $ingredient;
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  
+            $product_id = $row['product_id'];
+            $product = $this->getProduct($product_id);
+            
+            $ingredient_and_product = [...$row, ...$product];
+        }
+        
+        return $ingredient_and_product;
+    }
+
+    private function getProduct($product_id) {
+
+        return $this->product->selectProductByProductId($product_id);
+
     }
 }
 
