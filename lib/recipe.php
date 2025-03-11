@@ -3,55 +3,74 @@
 class Recipe {
 
     private $connection;
+    private $user;
+    private $product;
+    private $ingredient;
+    private $recipe_info;
+    private $cuisine_type;
     
-    public function __construct($connection, $ingredient, $recipe_info, $cuisine_type, $user) {
-
+    public function __construct($connection) {
+    
         $this->connection = $connection;
-        $this->ingredient = $ingredient;
-        $this->recipe_info = $recipe_info;
-        $this->cuisine_type = $cuisine_type;
-        $this->user = $user;
+        $this->user = new User($this->connection);
+        $this->product = new Product($this->connection);
+        $this->ingredient = new Ingredient($this->connection, $this->product);
+        $this->recipe_info = new RecipeInfo($this->connection, $this->user);
+        $this->cuisine_type = new CuisineType($this->connection);
 
     }
 
-    public function selectRecipe($recipe_id) {
+    public function selectRecipe($recipe_id = 0) {
 
+        $recipes = [];
         $recipe = [];
         $cuisine_id = '';
         $type_id = '';
         $user_id = '';
-
-        $sql = "SELECT * FROM `recipe` WHERE `id` = $recipe_id;";
+        
+        $sql = "SELECT * FROM `recipe`";
+    
+        if($recipe_id !== 0) {
+            $sql .= " WHERE `id` = $recipe_id;";
+        }
 
         $result = mysqli_query($this->connection, $sql);
-        $recipe = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        while($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
   
-        $cuisine_id = $recipe['cuisine_id'];
-        $type_id = $recipe['type_id'];
-        $user_id = '4'; // HARDCODED FOR TESTING     
+            $recipe = [];
+            
+            $recipe_id = $recipe['id'];
+            $cuisine_id = $recipe['cuisine_id'];
+            $type_id = $recipe['type_id'];
+            $user_id = '4'; // HARDCODED FOR TESTING     
 
-        $cuisine = $this->cuisine_type->selectCuisineType($cuisine_id); 
-        $type = $this->cuisine_type->selectCuisineType($type_id);
+            $cuisine = $this->cuisine_type->selectCuisineType($cuisine_id); 
+            $type = $this->cuisine_type->selectCuisineType($type_id);
+            
+            $recipe['cuisine'] = $cuisine['descr'];
+            $recipe['type'] = $type['descr'];
+            
+            $recipe['ingredients'] = $this->ingredient->selectIngredient($recipe_id);
+            $recipe['favorites'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'F');
+            $recipe['ratings'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'R');
+            $recipe['comments'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'C');
+            $recipe['instructions'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'I');
+            $recipe['current_user'] = $this->user->selectUser($user_id);
+
+            $recipe['price'] = $this->calculatePrice($recipe);
+            $recipe['kcal'] = $this->calculateKcal($recipe);
+            $recipe['avg_rating'] = $this->calculateRating($recipe);
+            $recipe['fav'] = $this->determineFavorite($recipe);
+
+            unset($recipe['ratings']);
+            unset($recipe['favorites']);
+
+            $recipes[] = $recipe;
+
+        }
         
-        $recipe['cuisine'] = $cuisine['descr'];
-        $recipe['type'] = $type['descr'];
-        
-        $recipe['ingredients'] = $this->ingredient->selectIngredient($recipe_id);
-        $recipe['favorites'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'F');
-        $recipe['ratings'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'R');
-        $recipe['comments'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'C');
-        $recipe['instructions'] = $this->recipe_info->selectRecipeInfo($recipe_id, 'I');
-        $recipe['current_user'] = $this->user->selectUser($user_id);
-
-        $recipe['price'] = $this->calculatePrice($recipe);
-        $recipe['kcal'] = $this->calculateKcal($recipe);
-        $recipe['avg_rating'] = $this->calculateRating($recipe);
-        $recipe['fav'] = $this->determineFavorite($recipe);
-
-        unset($recipe['ratings']);
-        unset($recipe['favorites']);
-
-        return $recipe;
+        return $recipes;
 
     }
 
