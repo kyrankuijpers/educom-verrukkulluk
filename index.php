@@ -10,17 +10,12 @@ require_once("lib/recipe.php");
 
 /// INIT
 $db = new Database();
-$product = new Product($db->getConnection());
-$user = new User($db->getConnection());
-$cuisine_type = new CuisineType($db->getConnection());
-$ingredient = new Ingredient($db->getConnection(), $product);
-$recipe_info = new RecipeInfo($db->getConnection(), $user);
-$recipe = new Recipe($db->getConnection(), $ingredient, $recipe_info, $cuisine_type, $user);
+$recipe = new Recipe($db->getConnection());
 
 /// VERWERK 
-$recipe_id = 3;
+$recipe_id = 0;
 
-$recipe_data = $recipe->selectRecipe($recipe_id, $ingredient, $recipe_info, $cuisine_type, $user);
+$recipe_data = $recipe->selectRecipe($recipe_id);
 
 /// RETURN
 
