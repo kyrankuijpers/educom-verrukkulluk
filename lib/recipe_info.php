@@ -41,6 +41,8 @@ class RecipeInfo {
     }
 
     public function addFavorite($recipe_id, $user_id) {
+        $this->deleteFavorite($recipe_id, $user_id);
+
         $sql = "INSERT INTO `recipe_info` (`record_type`, `recipe_id`, `user_id`) VALUES ('F', $recipe_id, $user_id);";
 
         $result = mysqli_query($this->connection, $sql);
@@ -49,7 +51,7 @@ class RecipeInfo {
     }
 
     public function deleteFavorite($recipe_id, $user_id) {
-        $sql = "DELETE FROM `recipe_info` WHERE `recipe_id` = $recipe_id AND `user_id` = $user_id;";
+        $sql = "DELETE FROM `recipe_info` WHERE `record_type` = 'F' AND `recipe_id` = $recipe_id AND `user_id` = $user_id;";
 
         $result = mysqli_query($this->connection, $sql);
 
