@@ -24,7 +24,8 @@ class Ingredient {
             $product_id = $row['product_id'];
             $product = $this->getProduct($product_id);
             
-            $ingredient_and_product = [...$row, ...$product];
+            $ingredient_and_product[] = [...$row, ...$product];
+
         }
         
         return $ingredient_and_product;
