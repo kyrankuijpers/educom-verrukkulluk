@@ -8,7 +8,7 @@ class Product {
         $this->connection = $connection;
     }
   
-    public function selectProductByProductId($product_id) {
+    public function selectProduct($product_id) {
         $sql = "SELECT * FROM `product` WHERE `id` = $product_id";
         
         $result = mysqli_query($this->connection, $sql);

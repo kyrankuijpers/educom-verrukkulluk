@@ -12,7 +12,7 @@ class Ingredient {
         
     }
 
-    public function selectIngredientByRecipeId($recipe_id) {
+    public function selectIngredient($recipe_id) {
         $ingredient_and_product = [];
         
         $sql = "SELECT * FROM `ingredient` WHERE `recipe_id` = $recipe_id;";
@@ -32,7 +32,7 @@ class Ingredient {
 
     private function getProduct($product_id) {
 
-        return $this->product->selectProductByProductId($product_id);
+        return $this->product->selectProduct($product_id);
 
     }
 }

@@ -8,7 +8,7 @@ class User {
         $this->connection = $connection;
     }
 
-    public function selectUserByUserId($user_id) {
+    public function selectUser($user_id) {
         $sql = "SELECT * FROM `user` WHERE `id` = $user_id";
 
         $result = mysqli_query($this->connection, $sql);

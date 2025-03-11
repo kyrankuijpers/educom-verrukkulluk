@@ -13,7 +13,7 @@ class RecipeInfo {
 
     public function selectRecipeInfo($recipe_id, $record_type) {
         
-        $sql = "SELECT * FROM `recipe_info` WHERE `recipe_id` = $recipe_id AND `record_type` = '$record_type'";
+        $sql = "SELECT * FROM `recipe_info` WHERE `recipe_id` = $recipe_id AND `record_type` = '$record_type';";
         $result = mysqli_query($this->connection, $sql);
         
         $recipe_info = [];
@@ -37,7 +37,7 @@ class RecipeInfo {
     }
 
     private function getUser($user_id) {
-        return $this->user->selectUserByUserId($user_id);
+        return $this->user->selectUser($user_id);
     }
 
     public function addFavorite($recipe_id, $user_id) {
