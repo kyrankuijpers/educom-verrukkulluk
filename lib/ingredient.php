@@ -5,10 +5,10 @@ class Ingredient {
     private $connection;
     private $product;
 
-    public function __construct($connection, $product) {
+    public function __construct($connection) {
 
         $this->connection = $connection;
-        $this->product = $product;
+        $this->product = new Product($this->connection);
         
     }
 

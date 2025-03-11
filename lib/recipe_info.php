@@ -5,10 +5,10 @@ class RecipeInfo {
     private $connection;
     private $user;
 
-    public function __construct($connection, $user) {
+    public function __construct($connection) {
        
         $this->connection = $connection;
-        $this->user = $user;
+        $this->user = new User($this->connection);
     }
 
     public function selectRecipeInfo($recipe_id, $record_type) {
