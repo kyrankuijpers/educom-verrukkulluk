@@ -1,7 +1,7 @@
 <html lang="nl">
 <head>
 
-    <title>het is verrukkuluk! :: {{ TITEL }} </title>
+    <title>Verrukkuluk:  {{ title }} </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
@@ -13,8 +13,10 @@
     <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
     <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 
-</html>
+</head>
+
 <body>
+
 <div class="container-fluid">
 
     <div class="row">
@@ -30,9 +32,10 @@
             <h2>Agenda</h2>
             <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
             <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
-
-
         </div>
+
+        {# LOGIN #}
+
         <div class="col-md-9">
             <h2>Content</h2>
             {%  block content %}
@@ -40,14 +43,14 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-md-12">
-            <h1>Footer</h1>
+            <h1>Contact</h1>
         </div>
     </div>
-
 
 </div>
 
 </body>
+
+</html>
