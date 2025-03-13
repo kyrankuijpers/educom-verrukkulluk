@@ -23,7 +23,6 @@ class Recipe {
     public function selectRecipe($recipe_id = 0) {
 
         $recipes = [];
-        $recipe = [];
         $cuisine_id = '';
         $type_id = '';
         $user_id = '';
@@ -37,8 +36,6 @@ class Recipe {
         $result = mysqli_query($this->connection, $sql);
 
         while($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-  
-            $recipe = [];
             
             $recipe_id = $recipe['id'];
             $cuisine_id = $recipe['cuisine_id'];
@@ -67,6 +64,7 @@ class Recipe {
             unset($recipe['favorites']);
 
             $recipes[] = $recipe;
+            $recipe = [];
 
         }
         
