@@ -7,20 +7,28 @@ require_once("lib/cuisine_type.php");
 require_once("lib/ingredient.php");
 require_once("lib/recipe_info.php");
 require_once("lib/recipe.php");
+require_once("lib/grocerylist.php");
 
 /// INIT
 $db = new Database();
 $recipe = new Recipe($db->getConnection());
+$grocerylist = new GroceryList($db->getConnection());
 
 /// VERWERK 
-$recipe_id = 0;
 
-$recipe_data = $recipe->selectRecipe($recipe_id);
+///// HARDCODED FOR TESTING /////
+$recipe_id = 1;
+$user_id = 2;
+///// HARDCODED FOR TESTING /////
+
+$grocerylist->addGroceries($recipe_id, $user_id);
+
+
 
 /// RETURN
 
 echo "<pre>";
-var_dump($recipe_data);
+//var_dump($data);
 echo "</pre>";
 
 ?>
