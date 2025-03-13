@@ -40,7 +40,10 @@ class Recipe {
             $recipe_id = $recipe['id'];
             $cuisine_id = $recipe['cuisine_id'];
             $type_id = $recipe['type_id'];
-            $user_id = '4'; // HARDCODED FOR TESTING     
+            
+            ///// HARDCODED FOR TESTING /////    
+            $user_id = 1;  
+            ///// HARDCODED FOR TESTING /////
 
             $cuisine = $this->cuisine_type->selectCuisineType($cuisine_id); 
             $type = $this->cuisine_type->selectCuisineType($type_id);
