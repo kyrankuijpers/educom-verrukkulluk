@@ -1,5 +1,58 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<h1>Hallo Bram</h1>
+
+<img class="recipe-img-header" src={{ data.img }}>
+
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <div class="recipe-detail-block block shadow">
+        <div id="recipe-img-details">
+            <img id="recipe-img-side" src={{ data.img }}>
+            <div id="recipe-details">
+                <div class="recipe-info-icons">
+                </div>
+                <h3>Vegan burger</h3>
+            </div>       
+        </div>
+    </div>
+
+    <div class="recipe-detail-block block shadow tabbable" id="tabs-695485">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active show" href="#tab1" data-bs-toggle="tab"><h4>Ingrediënten</h4></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab2" data-bs-toggle="tab"><h4>Bereidingswijze</h4></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tab3" data-bs-toggle="tab"><h4>Opmerkingen</h4></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <div>
+                    I'm in Section 1.
+                </div>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <div>
+                    Howdy, I'm in Section 2.
+                </div>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <div>
+                    Howdy, I'm in Section 3.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 {% endblock %}

@@ -42,7 +42,7 @@ switch($action) {
 
     case "detail": {
 
-        $data = $recipe->selectRecipe($recipe_id);
+        $data = $recipe->selectRecipe($recipe_id)[0];
         $template = "detail.html.twig";
         $title = "detailpagina";
         break;
