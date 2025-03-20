@@ -2,7 +2,7 @@
 
 {% block header %}
 
-<img class="recipe-img-header" src={{ data.img }}>
+<img class="recipe-img-header cover" src={{ data.img }}>
 
 {% endblock %}
 
@@ -11,11 +11,56 @@
 <div>
     <div class="recipe-detail-block block shadow">
         <div id="recipe-img-details">
-            <img id="recipe-img-side" src={{ data.img }}>
-            <div id="recipe-details">
-                <div class="recipe-info-icons">
+            
+            <img class="cover" id="recipe-img-side" src={{ data.img }}>
+            
+            <div id="recipe-details" class="d-flex flex-column justify-content-between">
+                <div id="recipe-container" class="d-flex flex-column">
+                    
+                    <div id="recipe-info-icons" class="d-flex flex-row">
+                        <i class="fa-solid fa-user-group recipe-icon"></i><p class="icon-value">4</p>
+                        <i class="fa-solid fa-euro-sign recipe-icon"></i><p class="icon-value">{{(data.price/100)|round}}</p>
+                        <i class="fa-solid fa-fire-flame-curved recipe-icon"></i><p class="icon-value">{{(data.kcal/4)|round}}</p>
+                    </div>
+                    
+                    <div class="d-flex flex-row justify-content-between between">
+                        <h3 class="recipe-title flex-grow-1">{{data.title}}</h3>
+                        
+                        <div>
+                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                        </div>
+
+                    </div>
+                    
+                    <div class="d-flex flex-row justify-content-between between">
+                    
+                        <div class="d-flex flex-row align-items-center">
+                            <h5 class="recipe-title cuisine-type-title">Keuken</h5>
+                            <p class="cuisine-type">{{data.cuisine}}</p>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center">
+                            <h5 class="recipe-title cuisine-type-title">Type</h5>
+                            <p class="cuisine-type">{{data.type}}</p>
+                        </div>
+
+                    </div>
+                    
+                    <p>{{data.descr_long}}</p>
+
                 </div>
-                <h3>Vegan burger</h3>
+
+                <div class="d-flex flex-row justify-content-between between">
+                    
+                    <a class="recipe-btn"><h5>Op lijst</h5></a>
+
+                    <a id="favourite-btn"><i id="favourite-icon" class="fa-regular fa-heart recipe-icon"></i></a>  
+
+                </div>           
             </div>       
         </div>
     </div>

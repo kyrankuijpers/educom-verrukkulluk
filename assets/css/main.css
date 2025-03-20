@@ -42,7 +42,7 @@ h2 {
 }
 
 h3 {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 h4 {
@@ -53,28 +53,29 @@ h5 {
     font-size: 20px;
 }
 
-p {
-    font-size: 12px;
-    line-height: 13px;
-}
-
-label {
-    font-size: 12px;
-}
-
 /** HTML / BODY **/
 html, body {
-    font-family: "Helvetica Neue", Arial, SansSerif;
-    font-size: 16px;
+    
+    font-family: "Helvetica Neue", Arial, SansSerif; 
+    font-size: 11px;
+    line-height: 12px;
+
+}
+
+/** IMAGES **/
+
+img.cover {
+    object-fit: cover;
+}
+
+img.heading {
+    height: 60px;
 }
 
 /** CONTAINER **/
 
 .container {
-
-    padding-left: 50px;
-    padding-right: 50px;
-
+    padding: 0 50px;
 }
 
 /** HEADER **/
@@ -90,108 +91,80 @@ header {
     height: 100%;
     width: 100%;
 
-    object-fit: cover;
-
 }
 
 .carousel-item {
+
     max-height: 100%;
+
 }
 
 li::marker {
-    font-size:0;
+
+    font-size: 0;
+
 }
 
 .logo {
+
     position: absolute;
     z-index: 1;
     top: 5%;
     left: 15%; 
     height: 20%;
+
 }
 
 /** CONTENT **/
 
 .content { 
 
-    height: 1100px;
-
-    padding-left: 30px;
-    padding-right: 30px;
+    height: 900px;
+    padding: 0px 30px;
 
 }
 
 .sidebar, .data {
-
-    height: 1000px;
-
-    display: flex;
-    flex-direction: column;
-
+    height: 800px;
 }
 
 /** AGENDA **/
 
 .agenda {
+
     background-color: var(--lighter-green);
-    
-    display: flex;
-    flex-direction: column;
+
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: center;
 
-    height: 600px;
-
-}
-
-#agenda-img {
-
-    height: 80px;
+    height: 500px;
 
 }
 
 .agenda p, h3 {
-
     width: 60%;
-
 }
 
 
 /** LOGIN **/
 
 .login {
+
     background-color: var(--darker-red);
     color: #FFF;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     
-    height: 300px;
-    padding-left: 25px;
-    padding-right: 25px;
-
-}
-
-#login-img {
-
-    height: 80px;
+    height: 250px;
 
 }
 
 #login-form {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    width:  350px;
-
+    width: 100%;    
 }
 
 .form-group {
 
     margin-bottom: 25px;
+    width: 80%;
 
 }
 
@@ -200,11 +173,8 @@ li::marker {
     background-color: var(--lighter-orange) !important;
     border-color: transparent !important;
 
-    height: 40px;
+    height: 30px;
     width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     border-radius: 15px;
     -moz-border-radius: 15px;
@@ -217,28 +187,22 @@ li::marker {
 /** RECIPE BLOCKS:HOMEPAGE AND DETAIL PAGE **/
 
 .block {
-
     margin-top: 40px;
-
 }
 
 .recipe-txt {
-
-    padding-left: 30px;
-    padding-right: 30px;
-
+    padding: 0px 30px;
 }
 
-#recipe-title {
+.recipe-title {
 
-    color: var(--darker-green);
-    
+    color: var(--darker-green);  
+    margin-bottom: 0px;
+
 }
 
 .recipe-home p {
-
     line-height: 16px;
-
 }
 
 .shadow {
@@ -265,16 +229,10 @@ li::marker {
     -moz-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.23);
     box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.23);
 
-    height: 35px;
-    width: 130px;
+    height: 25px;
+    width: 80px;
     display: flex;
     justify-content: center;
-
-}
-
-.recipe-btn h3 {
-
-    font-size: 28px;
 
 }
 
@@ -287,7 +245,7 @@ li::marker {
 
 }
 
-.price, .kcal {
+.icon-value {
 
     display: inline-block;
     margin-bottom: 0px;
@@ -300,19 +258,19 @@ li::marker {
 /** RECIPE BLOCKS: HOMEPAGE **/
 
 .recipe-home {
-    height: 450px;
+
     display: flex;
     flex-direction: column;
 
+    height: 360px;
     margin-left: 30px;
 
 }
 
 .recipe-img {
 
-    height: 175px;
+    height: 150px;
     width: 100%;
-    object-fit: cover;
 
 }
 
@@ -321,10 +279,9 @@ li::marker {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     flex-grow: 1.5;
-    padding-top: 15px;
-    padding-bottom: 15px;
+
+    padding: 15px 0px;
 
 }
 
@@ -334,8 +291,7 @@ li::marker {
     justify-content: space-between;
     align-items: center;
     
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 0px 30px;
 
 }
 
@@ -343,15 +299,14 @@ li::marker {
 
 .recipe-detail-block {
     
-    height: 450px;
-    box-sizing: border-box;
+    height: 350px;
+    margin-left: 30px;
 
 }
 
 #recipe-img-details {
 
     display: flex;
-    
     height: 100%;
 
 }
@@ -361,21 +316,72 @@ li::marker {
     height: 100%;
     width: 45%;
 
-    object-fit: cover;
-
 }
 
 #recipe-details {
 
     height: 100%;
     width: 55%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    padding: 15px 30px;
 
 }
+
+#recipe-container {
+    gap: 12px;
+}
+
+#recipe-info-icons {
+    width: 100%;
+}
+
+.between {
+    width: 100%;
+}
+
+#rating {
+
+    cursor: pointer;
+
+}
+
+.rating-star {
+
+    color: var(--lighter-orange);
+    cursor: pointer;
+
+    padding-top: 10px;
+
+}
+
+.cuisine-type-title {
+
+    display: inline-block;
+    margin-bottom: 0px;
+
+}
+
+.cuisine-type {
+
+    display: inline-block;
+    margin: 0px 0px 0px 10px;
+
+}
+
+#shopping-favourite {
+    width: 100%;
+}
+
+#favourite-btn {
+
+    cursor: pointer;
+
+}
+
+#favourite-icon {
+    font-size: 20px;
+}
+
+/** DETAIL NAVIGATION TABS: INGREDIENT, INSTRUCTION, COMMENTS**/
 
 #tabs-695485 {
 
@@ -402,10 +408,7 @@ li::marker {
     box-shadow: 2px 0px 3px 0px rgba(0,0,0,0.23);
 
     height: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 5px 25px 5px 25px;
     margin-bottom: 0px; 
 
 }
@@ -430,6 +433,12 @@ li::marker {
     width: 60%;
 }
 
+/** INGREDIENTS **/
+
+/** INSTRUCTION **/
+
+/** COMMENTS **/
+
 /** FOOTER **/
 
 footer {
@@ -451,13 +460,7 @@ footer {
 
 }
 
-.contact {
-    
-    line-height: 13px;
-
-}
-
-.contact p {
+#contact p {
 
     padding: 0;
     margin-top: 0px;
@@ -465,10 +468,9 @@ footer {
     margin-left: 50px;
 }
 
-#contact-header {
+#contact-heading {
 
     display: inline-block;
-    height: 80px;
     margin-left: 40px;
 
 }

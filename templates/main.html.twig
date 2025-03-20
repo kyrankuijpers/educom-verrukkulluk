@@ -38,39 +38,53 @@
     <div class="row content">
 
         {######################SIDEBAR#######################} 
-        <div class="col-md-4 sidebar">
+        <div class="col-md-4 sidebar d-flex flex-column">
 
             {######################AGENDA#######################}
-        	<div class="agenda block shadow">
-                <img id="agenda-img" src="assets/img/verrukkulluk-agenda.png">
+        	<div class="agenda block shadow d-flex flex-column">
+                
+                <img class="heading" src="assets/img/verrukkulluk-agenda.png">
+
                 <h3>Vegetarisch koken</h3>
                 <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee.</p>
+
                 <h3>Vegetarisch koken</h3>
                 <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee.</p>
+
                 <h3>Vegetarisch koken</h3>
                 <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee.</p>
+
                 <h3>Vegetarisch koken</h3>
                 <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee.</p>
+
                 <h3>Vegetarisch koken</h3>
                 <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee.</p>
+
             </div>
 
             {######################LOGIN#######################}  
-            <div class="login block shadow">
-                <img id="login-img" src="assets/img/verrukkulluk-login.png">
-                <form id="login-form">
+            <div class="login block shadow d-flex flex-column align-items-center">
+                
+                <img class="heading" src="assets/img/verrukkulluk-login.png">
+
+                <form id="login-form" class="d-flex flex-column align-items-center">
+                    
                     <div class="form-group">
                         <label for="email">Email</label> 
                         <input id="email" name="email" type="email" required="required" class="form-control">
                     </div>
+
                     <div class="form-group">
                         <label for="password">Wachtwoord</label> 
                         <input id="password" name="password" type="password" required="required" class="form-control">
                     </div> 
-                    <div class="form-group">
-                        <button name="submit" type="submit" class="btn btn-primary login-btn"><h3>Login</h3></button>
+
+                    <div class="form-group d-flex flex-row justify-content-center">
+                        <button name="submit" type="submit" class="btn btn-primary login-btn d-flex justify-content-center align-items-center"><h3>Login</h3></button>
                     </div>
+
                 </form>
+
             </div>
         </div>
 
@@ -87,16 +101,24 @@
     {######################FOOTER#######################}
     <div class="row">
         <div class="col-md-12">
+            
             <footer>
+                
                 <img id="payoff" src="assets/img/verrukkulluk-pay-off.png">
-                <div class="contact">
-                    <img id="contact-header" src="assets/img/verrukkulluk-contact.png">
+
+                <div id="contact">
+                    
+                    <img class="heading" id="contact-heading" src="assets/img/verrukkulluk-contact.png">
+
                     <p>Verrukkuluk.nl</p>
                     <p>Poststraat 2b</p>
                     <p>Sittard</p>
-                    <p>info@verrukkulluk.nl</p>              
+                    <p>info@verrukkulluk.nl</p>    
+                              
                 </div>
+
             </footer>
+
         </div>
     </div>
 
