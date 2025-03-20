@@ -399,15 +399,16 @@ li::marker {
     
     color: var(--darker-green) !important;
 
-    border-radius: 20px 20px 0px 0px !important;
-    -moz-border-radius: 20px 20px 0px 0px !important;
-    -webkit-border-radius: 20px 20px 0px 0px !important;
+    border-top-left-radius: 40px 25px !important;
+    border-top-right-radius: 40px 25px !important;
+    -moz-border-radius-top-left: 40px 25px !important;
+    -webkit-border-radius-top-left: 40px 25px !important;
 
     -webkit-box-shadow: 2px 0px 3px 0px rgba(0,0,0,0.23);
     -moz-box-shadow: 2px 0px 3px 0px rgba(0,0,0,0.23);
     box-shadow: 2px 0px 3px 0px rgba(0,0,0,0.23);
 
-    height: 25px;
+    height: 20px;
     padding: 5px 25px 5px 25px;
     margin-bottom: 0px; 
 
@@ -422,16 +423,21 @@ li::marker {
 }
 
 .nav-link h4 {
-
     margin-bottom: 0px;
-
 }
 
 .tab-content {
+    height: 330px;
+}
+
+.tab-pane {
 
     height: 100%;
-    width: 60%;
+    overflow-y: scroll;
+
 }
+
+
 
 /** INGREDIENTS **/
 
