@@ -24,7 +24,7 @@
                     </div>
                     
                     <div class="d-flex flex-row justify-content-between between">
-                        <h3 class="recipe-title flex-grow-1">{{data.title}}</h3>
+                        <h3 class="green recipe-title flex-grow-1">{{data.title}}</h3>
                         
                         <div>
                             <a><i class="fa-regular fa-star rating-star"></i></a>
@@ -39,12 +39,12 @@
                     <div class="d-flex flex-row justify-content-between between">
 
                         <div class="d-flex flex-row align-items-center">
-                            <h5 class="recipe-title cuisine-type-title">Keuken</h5>
+                            <h5 class="green cuisine-type-title">Keuken</h5>
                             <p class="cuisine-type">{{data.cuisine}}</p>
                         </div>
 
                         <div class="d-flex flex-row align-items-center">
-                            <h5 class="recipe-title cuisine-type-title">Type</h5>
+                            <h5 class="green cuisine-type-title">Type</h5>
                             <p class="cuisine-type">{{data.type}}</p>
                         </div>
 
@@ -69,30 +69,36 @@
         
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active show" href="#tab1" data-bs-toggle="tab"><h5>Ingrediënten</h5></a>
+                <a class="nav-link active show" href="#tab1" data-bs-toggle="tab"><h5 class="green">Ingrediënten</h5></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#tab2" data-bs-toggle="tab"><h5>Bereidingswijze</h5></a>
+                <a class="nav-link" href="#tab2" data-bs-toggle="tab"><h5 class="green">Bereidingswijze</h5></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#tab3" data-bs-toggle="tab"><h5>Opmerkingen</h5></a>
+                <a class="nav-link" href="#tab3" data-bs-toggle="tab"><h5 class="green">Opmerkingen</h5></a>
             </li>
         </ul>
 
         <div class="tab-content">
             <div class="tab-pane active" id="tab1">
-                <div id="ingredients">
-                    
+                <div id="ingredients">                 
                     {% for ingredient in data.ingredients %}
-                        <pre>{{dump(ingredient.product_id)}}</pre>
-                        <pre>{{dump(ingredient.img)}}</pre>
-                        <pre>{{dump(ingredient.name)}}</pre>
-                        <pre>{{dump(ingredient.descr)}}</pre>
-                        <pre>{{dump(ingredient.amount)}}</pre>
-                        <pre>{{dump(ingredient.unit)}}</pre>
+                        
+                        <div class="d-flex">
+
+                            <img class="tab-img" src={{"assets/img/products/#{ingredient.product_id}.png"}}></img>
+
+                            <div class="tab-info d-flex flex-column">                       
+                                <h5 class="green">{{ingredient.name}}</h5>
+                                <p class="ingredient-descr">{{ingredient.descr}}</p>
+                                 <div>
+                                    <h5 class="green amount">Hoeveelheid:</h5> <p class="amount">{{ingredient.amount}} {{ingredient.unit}}</p>
+                                </div>
+                            </div>
+
+                        </div>
 
                     {% endfor %}
-
                 </div>
             </div>
 
@@ -101,9 +107,18 @@
                     
                     {% for instruction in data.instructions %}
 
-                        <pre>{{dump(instruction.info_numeric)}}</pre>
-                        <pre>{{dump(instruction.info_txt)}}</pre>
+                        <div class="d-flex">
 
+                            <div class="tab-img d-flex justify-content-center align-items-center">
+                                <div class="step-circle d-flex justify-content-center align-items-center">
+                                    <p class="instruction-number">{{instruction.info_numeric}}.</p>
+                                </div>
+                            </div>
+
+                            <p class="tab-info instruction-text">{{instruction.info_txt}}</p>
+
+                        </div>
+                        
                     {% endfor %}
 
                 </div>
@@ -114,10 +129,16 @@
 
                     {% for comment in data.comments %}
 
-                        <pre>{{dump(comment.img)}}</pre>
-                        <pre>{{dump(comment.user_name)}}</pre>
-                        <pre>{{dump(comment.info_txt)}}</pre>
+                        <div class="d-flex">
+                            <img class="tab-img profile-pic" src={{"assets/img/users/#{comment.user_id}.png"}}></img>
 
+                            <div class="tab-info">
+                                <h4 class="green">{{comment.user_name}}</h4>
+                                <p>{{comment.info_txt}}</p>
+                            </div>
+
+                        </div>
+                        
                     {% endfor %}
 
                 </div>

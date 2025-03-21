@@ -31,6 +31,7 @@
 /** HEADING **/
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading) !important;
+
 }
 
 h1 {
@@ -51,6 +52,12 @@ h4 {
 
 h5 {
     font-size: 20px;
+}
+
+.green {
+
+    color: var(--darker-green);
+
 }
 
 /** HTML / BODY **/
@@ -153,7 +160,7 @@ li::marker {
     background-color: var(--darker-red);
     color: #FFF;
     
-    height: 250px;
+    height: 225px;
 
 }
 
@@ -196,7 +203,6 @@ li::marker {
 
 .recipe-title {
 
-    color: var(--darker-green);  
     margin-bottom: 0px;
 
 }
@@ -392,12 +398,10 @@ li::marker {
 }
 
 .nav-link, .nav-link:hover, .nav-link.active {
-
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
-    color: var(--darker-green) !important;
 
     border-top-left-radius: 40px 25px !important;
     border-top-right-radius: 40px 25px !important;
@@ -437,13 +441,77 @@ li::marker {
 
 }
 
+.tab-img {
 
+    height: 75px;
+    width: 75px;
+    margin-left: 30px;
+    margin-top: 30px;
+
+}
+
+.tab-info {
+
+    width: 50%;
+    margin-left: 20px;
+    margin-top: 30px;
+
+}
 
 /** INGREDIENTS **/
 
+.amount {
+
+    display: inline-block;
+
+}
+
+h5.amount {
+
+    font-size: 16px;
+
+}
+
 /** INSTRUCTION **/
 
+.step-circle {
+
+    height: 50px;
+    width: 50px;
+    
+    background-color: var(--lighter-orange);
+    color: #FFF;
+
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: transparent;
+
+}
+
+.instruction-number {
+
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 0px 0px 3px;
+
+}
+
+.instruction-text {
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
 /** COMMENTS **/
+
+.profile-pic {
+    
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 3px solid var(--darker-orange);
+
+}
 
 /** FOOTER **/
 
