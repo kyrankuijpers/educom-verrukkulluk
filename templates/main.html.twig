@@ -20,11 +20,29 @@
 <div class="container">
 
     {######################HEADER#######################} 
-    <div class="row" >
+    <div class="row" id="header-row">
 
         <header>
             <div class="col-md-12 header">
-                <img class="logo" src="assets/img/logo-v2.png"/>
+                
+                <img id="logo" src="assets/img/logo-v2.png"/>
+
+                <div id="dropdown" class="d-flex justify-content-evenly align-items-center">
+                    
+                    <img id="menu-logo" src="assets/img/logo-v2.png">
+                    <a class="menu-header"><h3>Mijn Favorieten</h3></a>
+                    <a class="menu-header"><h3>Mijn Boodschappenlijst</h3></a>
+
+                </div>            
+                
+                <div id="navbar" class="d-flex justify-content-end align-items-center">
+                    
+                    <a id="search"><i class="fa fa-search"></i></a>
+                    <input id="searchbar" type="text" placeholder="Zoeken" name="search">
+
+                    <a id="menu-btn"><i class="fa-solid fa-bars"></i></a>
+
+                </div>
 
                 {% block header %}
                     

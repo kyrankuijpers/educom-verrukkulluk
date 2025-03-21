@@ -86,41 +86,143 @@ img.heading {
 }
 
 /** HEADER **/
+#header-row {
+    margin: 0px;
+}
+
 header { 
 
     padding: 0px !important;
     height: 450px;
-    
+
+    position: relative;
+
 }
 
 .recipe-img-header {
-
+    
     height: 100%;
     width: 100%;
 
 }
 
 .carousel-item {
-
     max-height: 100%;
-
 }
 
 li::marker {
-
     font-size: 0;
-
 }
 
-.logo {
+#logo {
 
     position: absolute;
     z-index: 1;
     top: 5%;
-    left: 15%; 
-    height: 20%;
+    left: 5%; 
+    height: 25%;
 
 }
+
+#navbar {
+
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+
+    height: 60px;
+    width: 30%;
+
+}
+
+#searchbar {
+
+    height: 45%;
+    width: 75%;
+
+    display: inline-block;
+
+    background-color: #FFF;
+
+    border-radius: 0px 10px 10px 0px;
+    -moz-border-radius: 0px 10px 10px 0px; 
+    -webkit-border-radius: 0px 10px 10px 0px; 
+    border: 0px transparent;
+
+}
+
+#search {
+
+    height: 45%;
+    width: 10%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFF;
+    color: var(--darker-orange);
+    font-size: 16px;
+    
+    border-radius: 10px 0px 0px 10px;
+    -moz-border-radius: 10px 0px 0px 10px;
+    -webkit-border-radius: 10px 0px 0px 10px; 
+    border: 0px;
+
+}
+
+#menu-btn {
+
+    height: 90%;
+    width: 25%;
+
+    color: var(--darker-orange);
+    font-size: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+}
+
+#menu-btn:hover #dropdown {
+
+    top: 0px;
+}
+
+#dropdown {
+
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    
+    z-index: 10;
+    
+    height: 25%;
+    width: 100%;
+
+    background-color: #FFF;
+    border: 1px solid black;
+
+}
+
+#menu-logo {
+
+    height: 60%;
+
+}
+
+.menu-header {
+
+
+
+    color: var(--lighter-red);
+    text-decoration: none;
+
+}
+
 
 /** CONTENT **/
 
