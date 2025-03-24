@@ -110,6 +110,10 @@ header {
     max-height: 100%;
 }
 
+.carousel-control-next {
+    z-index: 0;
+}
+
 li::marker {
     font-size: 0;
 }
@@ -128,7 +132,7 @@ li::marker {
 
     position: absolute;
     right: 0px;
-    z-index: 1;
+    z-index: 5;
 
     height: 60px;
     width: 30%;
@@ -187,15 +191,10 @@ li::marker {
 
 }
 
-#menu-btn:hover #dropdown {
-
-    top: 0px;
-}
-
 #dropdown {
 
     position: fixed;
-    top: 0px;
+    top: -100%;
     right: 0px;
     
     z-index: 10;
@@ -206,6 +205,8 @@ li::marker {
     background-color: #FFF;
     border: 1px solid black;
 
+    transition: all 0.7s ease-out;
+
 }
 
 #menu-logo {
@@ -215,8 +216,6 @@ li::marker {
 }
 
 .menu-header {
-
-
 
     color: var(--lighter-red);
     text-decoration: none;

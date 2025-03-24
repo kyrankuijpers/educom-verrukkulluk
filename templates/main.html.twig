@@ -142,6 +142,32 @@
 
 </div>
 
+<script>
+
+$(document).ready( function() {
+
+    //////////////////////////// DROPDOWN MENU ///////////////////////////////
+
+    const dropdown = $("#dropdown");
+
+    $("#menu-btn").on("click", function() {
+
+        dropdown.css("top", "0%");
+
+    });
+
+    dropdown.on("click", function() {
+        
+        dropdown.css("top", "-100%");
+        
+    })
+
+
+
+});
+
+</script>
+
 </body>
 
 </html>
