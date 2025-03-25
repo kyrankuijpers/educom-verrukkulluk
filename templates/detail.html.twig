@@ -56,7 +56,7 @@
 
                 <div class="d-flex flex-row justify-content-between between">
                     
-                    <a class="recipe-btn"><h5>Op lijst</h5></a>
+                    <a class="recipe-btn" id="add-cart"><h5>Op lijst</h5></a>
 
                     <a id="favourite-btn"><i id="favourite-icon" class="fa-regular fa-heart recipe-icon"></i></a>  
 
@@ -86,7 +86,7 @@
                         
                         <div class="d-flex">
 
-                            <img class="tab-img" src={{"assets/img/products/#{ingredient.product_id}.png"}}></img>
+                            <img class="tab-img" src={{"assets/img/products/#{ingredient.product_id}.png"}}>
 
                             <div class="tab-info d-flex flex-column">                       
                                 <h5 class="green">{{ingredient.name}}</h5>
@@ -175,6 +175,8 @@
 
     showRating({{data.avg_rating}});
 
+    //////////////////////////////// RATE RECIPE /////////////////////////////////////////
+
     $(".rating-star").on("click", function() {
         
         var chosen_rating = $(this).attr("data-value");
@@ -221,6 +223,26 @@
             showRating({{data.avg_rating}});
 
     });
+
+    
+    //////////////////////////////// ADD PRODUCTS TO CART /////////////////////////////////////////
+    
+    $("#add-cart").on("click", function() {
+
+        $.ajax({
+            url: "index.php",
+            method: "GET",
+            data: {"action" : "add_to_cart", "recipe_id" : {{data.id}}},
+            success: function(result){
+
+                console.log("success");
+                $("#add-cart").css("background-color", "var(--lighter-green)");
+                $("#add-cart").html("<h4>Toegevoegd</h4>");
+
+            }
+        });
+    });
+
 
 </script>
 
