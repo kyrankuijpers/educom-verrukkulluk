@@ -22,6 +22,7 @@ require_once("lib/grocerylist.php");
 
 $db = new Database();
 $recipe = new Recipe($db->getConnection());
+$recipe_info = new RecipeInfo($db->getConnection());
 
 $recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : "";
 $action = isset($_GET['action']) ? $_GET['action'] : "homepage";
@@ -48,12 +49,30 @@ switch($action) {
         break;
     }
 
+    case "rating": {
+
+        $data = [];
+        $rating = $_GET["rating"];
+
+        $new_average = $recipe_info->addRatingAndReturnAverage($recipe_id, $rating);
+
+        $data['new_average'] = $new_average;
+
+        echo json_encode($data);
+
+        break;
+    }
 }
 
-$template = $twig->load($template);
+if($action !== "rating") {
 
-// Show page
-echo $template->render(["title" => $title, "data" => $data]);
+    $template = $twig->load($template);
+
+    // Show page
+    echo $template->render(["title" => $title, "data" => $data]);
+
+}
+
 
 
 

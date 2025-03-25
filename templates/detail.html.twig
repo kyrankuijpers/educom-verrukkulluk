@@ -26,12 +26,12 @@
                     <div class="d-flex flex-row justify-content-between between">
                         <h3 class="green recipe-title flex-grow-1">{{data.title}}</h3>
                         
-                        <div>
-                            <a><i class="fa-regular fa-star rating-star"></i></a>
-                            <a><i class="fa-regular fa-star rating-star"></i></a>
-                            <a><i class="fa-regular fa-star rating-star"></i></a>
-                            <a><i class="fa-regular fa-star rating-star"></i></a>
-                            <a><i class="fa-regular fa-star rating-star"></i></a>
+                        <div id="stars">
+                            <a><i data-value="1" class="fa-regular fa-star rating-star"></i></a>
+                            <a><i data-value="2" class="fa-regular fa-star rating-star"></i></a>
+                            <a><i data-value="3" class="fa-regular fa-star rating-star"></i></a>
+                            <a><i data-value="4" class="fa-regular fa-star rating-star"></i></a>
+                            <a><i data-value="5" class="fa-regular fa-star rating-star"></i></a>
                         </div>
 
                     </div>
@@ -149,7 +149,79 @@
     </div>
 </div>
 
+<script>
 
+    //////////////////////////////// SHOW RECIPE RATING ///////////////////////////////
+    
+    function showRating(average) {
 
+        $(".rating-star").each((index, rating_star) => {
+
+            const star_value = $(rating_star).attr("data-value");
+    
+            if(average >= star_value ) {
+
+                $(rating_star).removeClass("fa-regular");
+                $(rating_star).addClass("fa-solid");
+            } 
+            if(average < star_value) {
+
+                $(rating_star).removeClass("fa-solid");
+                $(rating_star).addClass("fa-regular");
+
+            };
+        });
+    }
+
+    showRating({{data.avg_rating}});
+
+    $(".rating-star").on("click", function() {
+        
+        var chosen_rating = $(this).attr("data-value");
+
+        $.ajax({
+            
+            url: "index.php",
+            method: "GET",
+        	data: {'action': 'rating', 'recipe_id': {{data.id}}, 'rating': chosen_rating},
+            dataType: "JSON",
+            success: function(result) {
+
+                var new_average = result.new_average;
+                
+                showRating(new_average);
+            }
+        });
+    });
+
+    $(".rating-star").hover(function() {
+
+       var hover_rating = $(this).attr("data-value"); 
+
+        $(".rating-star").each((index, rating_star) => {
+
+            const star_value = $(rating_star).attr("data-value");
+    
+            if(hover_rating >= star_value ){
+
+                $(rating_star).removeClass("fa-regular");
+                $(rating_star).addClass("fa-solid");
+            } else {
+
+                $(rating_star).removeClass("fa-solid");
+                $(rating_star).addClass("fa-regular");
+
+            }
+        });
+
+    });
+
+    $("#stars").on("mouseleave", function() {
+
+            showRating({{data.avg_rating}});
+
+    });
+
+</script>
 
 {% endblock %}

@@ -58,6 +58,24 @@ class RecipeInfo {
         return $result;
     }
 
+    public function addRatingAndReturnAverage($recipe_id, $rating) {
+
+        $sql = "INSERT INTO `recipe_info` (`record_type`, `recipe_id`, `info_numeric`) VALUES ('R', $recipe_id, $rating);";
+        $insert_result = mysqli_query($this->connection, $sql);
+
+        $sql = "SELECT AVG(`info_numeric`) AS `average_rating` FROM `recipe_info` WHERE `record_type` = 'R' AND `recipe_id` = $recipe_id;";      
+        $avg_result = mysqli_query($this->connection, $sql);
+
+        while($avg_row = mysqli_fetch_array($avg_result, MYSQLI_ASSOC)) {
+            
+            $new_average = $avg_row['average_rating'];
+            
+        }
+
+        return $new_average;
+
+    }
+
 }
 
 ?>

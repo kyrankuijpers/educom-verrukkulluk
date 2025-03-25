@@ -302,12 +302,6 @@ li::marker {
     padding: 0px 30px;
 }
 
-.recipe-title {
-
-    margin-bottom: 0px;
-
-}
-
 .recipe-home p {
     line-height: 16px;
 }
@@ -392,6 +386,12 @@ li::marker {
 
 }
 
+.recipe-title-home {
+
+    margin-bottom: 0px;
+
+}
+
 .recipe-bottom {
 
     display: flex;
@@ -433,6 +433,12 @@ li::marker {
 
 }
 
+.recipe-title {
+
+    margin-bottom: 0px;
+
+}
+
 #recipe-container {
     gap: 12px;
 }
@@ -443,6 +449,12 @@ li::marker {
 
 .between {
     width: 100%;
+}
+
+#stars {
+
+    height: 50%;
+
 }
 
 #rating {
