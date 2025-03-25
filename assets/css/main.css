@@ -215,13 +215,18 @@ li::marker {
 
 }
 
-.menu-header {
+a.menu {
 
     color: var(--lighter-red);
     text-decoration: none;
 
 }
 
+h3.menu {
+
+    width: 100%;
+
+}
 
 /** CONTENT **/
 
