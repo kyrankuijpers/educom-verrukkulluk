@@ -26,6 +26,7 @@ $grocerylist = new GroceryList($db->getConnection());
 
 $recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : "";
 $action = isset($_GET['action']) ? $_GET['action'] : "homepage";
+$grocerylist_id = isset($_GET['grocerylist_id']) ? $_GET['grocerylist_id'] : "";
 
 // HARDCODED FOR TESTING //
 $user_id = 2;
@@ -70,14 +71,27 @@ switch($action) {
         break;
     }
 
+    case "delete_product_from_grocerylist": {
+
+        $result = $grocerylist->deleteProductFromGroceryList($grocerylist_id);
+        break;
+    }
+
+    case "delete_grocerylist": {
+
+        $result = $grocerylist->deleteGroceryList($user_id);
+        break;
+    }
+
     case "add_to_cart": {
 
         $result = $grocerylist->addGroceries($recipe_id, $user_id);
         break;
     }
+
 }
 
-if(($action !== "rating") && ($action !== "add_to_cart")) {
+if(($action === "homepage") || ($action === "detail") || ($action === "grocerylist")) {
 
     $template = $twig->load($template);
 

@@ -35,6 +35,14 @@ class GroceryList {
         $result = mysqli_query($this->connection, $sql);
     }
 
+    public function deleteProductFromGroceryList($grocerylist_id) {
+
+        $sql = "DELETE FROM `grocerylist` WHERE `id` = $grocerylist_id;";
+
+        $result = mysqli_query($this->connection, $sql);
+
+    }
+
     public function addGroceries($recipe_id, $user_id) {
 
         $product_id = 0;

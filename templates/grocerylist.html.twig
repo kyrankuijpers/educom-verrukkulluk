@@ -37,6 +37,8 @@
 
 {% endblock %}
 
+{##########################GROCERY LIST#######################}
+
 {% block content %}
 
 <div class="shadow" id="grocerylist-block">
@@ -47,32 +49,120 @@
 
     <div class="d-flex flex-column justify-content-evenly" id="cart-content">
         
+        {% set total_price = 0 %}
+
         {% for product in data %}
-            <div class="cart-product d-flex flex-row justify-content-between">
+            {% set total_price = total_price + product.price %}
+            
+            <div id={{"grocerylist#{product.id}"}} class="cart-product d-flex flex-row justify-content-between">
+                
                 <img src={{"assets/img/products/#{product.product_id}.png"}}>
                 
                 <div class="cart-txt">
-                    <h5 class="green">{{product.name}}</h5>
+                    <h4 class="green">{{product.name}}</h4>
                     <p>{{product.descr}}</p>
                 </div>
 
-                <div class="cart-numbers d-flex justify-content-evenly align-items-center">
-                    <p class="cart-qty"> {{(product.amount_needed / product.content)|round(0, 'ceil')}}</p>           
-                    <p class="cart-price">{{product.price}}</p>
-                    <div class="cart-icons"></div>
+                <div class="cart-numbers d-flex justify-content-evenly align-items-start">
+                    
+                    <div class="cart-qty d-flex justify-content-center align-items-center">
+                        <div class="qty-container d-flex justify-content-center align-items-center">
+                            <p>{{(product.amount_needed / product.content)|round(0, 'ceil')}}</p>     
+                        </div>
+                    </div>
+                     
+                    <div class="cart-price d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-euro-sign cart-icon"></i>
+                        <p>{{(product.price/100)|number_format(2, '.', ',')}}</p>
+                    </div>
+
+                    <div class="cart-icons d-flex justify-content-evenly align-items-center">
+                        <i class="fa-solid fa-check cart-icon"></i>
+                        <i class="fa-solid fa-trash cart-icon delete-product" data-value={{product.id}}></i>            
+                    </div>
+
                 </div>              
 
             </div>
+
         {% endfor %}
 
     </div>
 
-    <div id="cart-footer">
-        <h3>Totaal</h3>
+    <div id="cart-footer" class="d-flex justify-content-between align-items-center">
+        
+        <h2>Totaal</h2>
+
+        <div id="cart-txt-dummy">
+        </div>
+        
+        <div class="cart-numbers d-flex justify-content-evenly align-items-start">
+            <div class="cart-qty d-flex justify-content-center align-items-center">
+                <div class="qty-container-dummy d-flex justify-content-center align-items-center">
+                    <p></p>     
+                </div>
+            </div>
+            
+            <div>
+                <div class="cart-price d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-euro-sign cart-icon"></i>
+                    <p id="total-price">{{(total_price/100)|number_format(2, '.', ',')}}</p>
+                </div>
+            </div>
+
+            <div class="cart-icons d-flex justify-content-evenly align-items-center">
+                <i class="fa-solid fa-check cart-icon-dummy"></i>
+                <i class="fa-solid fa-trash cart-icon" id="delete-all"></i>            
+            </div>
+        </div>
+        
     </div>
 
-
-
 </div>
+
+<script>
+
+///////////////////////////// (RE)CALCULATE TOTAL PRICE /////////////////////////////////////////
+
+
+
+
+///////////////////////////// DELETE PRODUCT IN GROCERYLIST /////////////////////////////////////////
+
+$(".delete-product").on("click", function() {
+
+    const product = $(this);
+    const grocerylist_id = product.attr("data-value");
+
+    $.ajax({
+        url: "index.php",
+        method: "GET",
+        data: {"action": "delete_product_from_grocerylist", "grocerylist_id": grocerylist_id},
+        success: function(result) {
+
+            const grocerylist_row = $(`#grocerylist${grocerylist_id}`);     
+            grocerylist_row.remove();
+        }
+    });
+
+});
+
+$("#delete-all").on("click", function() {
+
+    $.ajax({
+        url: "index.php",
+        method: "GET",
+        data: {"action": "delete_grocerylist", "user_id": 2},
+        success: function(result) {
+
+            $(".cart-product").remove();
+
+        }
+    });
+});
+
+///////////////////////////////// DELETE ALL PRODUCTS IN GROCERYLIST /////////////////////////////////
+
+</script>
 
 {% endblock %}

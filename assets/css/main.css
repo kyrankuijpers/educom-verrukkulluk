@@ -635,76 +635,160 @@ h5.amount {
     margin-left: 30px;
     margin-top: 40px;
     height: 100%;
+    padding: 30px 0px 30px 30px;
+    box-sizing: border-box;
 
 }
 
 #cart-header {
 
     height: 5%;
+    margin-bottom: 75px;
 
 }
 
 #cart-content {
 
-    height: 90%;
+    height: 65%;
     width: 100%;
+    margin-bottom: 75px;
 
     overflow-y: scroll;
 
 }
 
+.cart-product {
+
+    height: 100px;
+    flex-shrink: 0;
+
+}
+
 .cart-product img {
 
-    width: 10%;
-    border: 1px solid black;
+    height: 100%;
+    width: 13%;
+
+    object-fit: contain;
 
 }
 
 .cart-txt {
 
+    height: 100%;
     width: 40%;
-    border: 1px solid black;
+    
+    font-size: 13px;
 
 }
 
 .cart-numbers {
 
-    width: 40%;
-    border: 1px solid black;
+    height: 100%;
+    width: 35%;
+    margin-right: 30px;
+
+    font-size: 14px;
 
 }
 
 .cart-qty {
 
-    height: 50%;
-    width: 10%;
+    height: 40%;
+    width: 22%;
     margin-bottom: 0px;
-    border: 1px solid black;
+
+}
+
+.qty-container {
+
+    width: 100%;
+    height: 50%;
+    
+    border: 1px solid #f0f0f0;
+
+}
+
+.qty-container-dummy {
+
+    width: 100%;
+    height: 50%;
+    
+}
+
+.qty-container p {
+
+    margin-bottom: 0px;
+
+    color: var(--lighter-green);
 
 }
 
 .cart-price {
 
-    height: 50%;
-    width: 10%;
+    height: 40%;
+    width: 20%;
     margin-bottom: 0px;
-    border: 1px solid black;
 
+}
+
+.cart-price p {
+    margin: 0px 0px 0px 5px;
 }
 
 .cart-icons {
 
-    height: 50%;
-    width: 10%;
+    height: 40%;
+    width: 25%;
     margin-bottom: 0px;
-    border: 1px solid black;
+
+}
+
+.cart-icon.cart-icon.fa-euro-sign {
+
+    color: var(--lighter-red);
+    font-size: 15px;
+
+}
+
+.cart-icon.fa-trash {
+
+    color: var(--darker-red);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+}
+
+.cart-icon-dummy {
+
+    color: white;
+
+    font-size: 22px;
+
+}
+
+.cart-icon.fa-check {
+
+    color: var(--darker-green);
+
+    font-size: 22px;
 
 }
 
 #cart-footer {
 
     height: 5%;
-    width: 100%;
+    width: 97.8%;
+    margin-top: 30px;
+
+}
+
+#cart-footer h2 {
+    
+    width: 13%;
+
     color: var(--darker-red);
 
 }
@@ -713,6 +797,7 @@ h5.amount {
 /** FOOTER **/
 
 footer {
+
     background-color: var(--darker-orange);
     color: #FFF;
 
@@ -721,6 +806,13 @@ footer {
 
     height: 210px;
     padding: 50px;
+
+}
+
+#cart-txt-dummy {
+
+    height: 100%;
+    width: 40.5%;
 
 }
 
