@@ -13,6 +13,7 @@
     <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6faaec2be0.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -35,11 +36,19 @@
 
                 </div>            
                 
-                <div id="navbar" class="d-flex justify-content-end align-items-center">
-                    
-                    <a id="search"><i class="fa fa-search"></i></a>
-                    <input id="searchbar" type="text" placeholder="Zoeken" name="search">
+                <div id="navbar" class="d-flex justify-content-end align-items-start">
 
+                    <a id="search-icon"><i class="fa fa-search"></i></a>
+            
+                    <div id="searchbar-container" class="d-flex flex-column">
+                        
+                        <input id="searchbar" type="text" placeholder="Zoeken" name="search" onkeyup="showRecipe(this.value)">
+                        
+                        <div id="suggestions">
+                        </div>
+
+                    </div>
+                    
                     <a id="menu-btn"><i class="fa-solid fa-bars"></i></a>
 
                 </div>
@@ -144,25 +153,54 @@
 
 <script>
 
-$(document).ready( function() {
+    //////////////////////////// LIVESEARCH BAR RECIPE  ///////////////////////////////
 
-    //////////////////////////// DROPDOWN MENU ///////////////////////////////
+    function showRecipe(searchstring) {
+        
+        var suggestions = $("#suggestions");
+        
+        if(searchstring.length == 0) {
 
-    const dropdown = $("#dropdown");
+            suggestions.html("");
 
-    $("#menu-btn").on("click", function() {
+            return;
 
-        dropdown.css("top", "0%");
+        }
+
+        $.ajax({
+            
+            url: "index.php",
+            method: "GET",
+            data: { "action": "search", "searchstring": searchstring},
+            success: function(result) {
+
+                suggestions.html(result);
+            }
+        });
+    }
+
+    $(document).ready( function() {
+
+        //////////////////////////// DROPDOWN MENU ///////////////////////////////
+
+        const dropdown = $("#dropdown");
+
+        $("#menu-btn").on("click", function() {
+
+            dropdown.css("top", "0%");
+
+        });
+
+        dropdown.on("click", function() {
+            
+            dropdown.css("top", "-100%");
+            
+        })
+
+        //////////////////////////// LIVESEARCH RECIPES ///////////////////////////////
+
 
     });
-
-    dropdown.on("click", function() {
-        
-        dropdown.css("top", "-100%");
-        
-    })
-
-});
 
 </script>
 

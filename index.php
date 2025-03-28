@@ -27,6 +27,7 @@ $grocerylist = new GroceryList($db->getConnection());
 $recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : "";
 $action = isset($_GET['action']) ? $_GET['action'] : "homepage";
 $grocerylist_id = isset($_GET['grocerylist_id']) ? $_GET['grocerylist_id'] : "";
+$searchstring = isset($_GET['searchstring']) ? $_GET['searchstring'] : "";
 
 // HARDCODED FOR TESTING //
 $user_id = 2;
@@ -89,6 +90,31 @@ switch($action) {
         break;
     }
 
+    case "search": {
+
+        $recipes = $recipe->selectRecipe();
+        $hint = "";
+
+        foreach($recipes as $option) {
+
+            $title = $option['title'];
+            $recipe_id = $option['id'];
+            
+            if(stristr($title, $searchstring)) {
+
+                if ($hint == "") {
+
+                    $hint="<a href='?action=detail&recipe_id=$recipe_id' target='_blank'>$title</a>";
+
+                } else {
+                    
+                    $hint = $hint . "<br /><a href=''?action=detail&recipe_id=$recipe_id' target='_blank'>$title</a>";
+                }
+            }
+        }
+        echo $hint;
+        break;
+    }
 }
 
 if(($action === "homepage") || ($action === "detail") || ($action === "grocerylist")) {

@@ -134,15 +134,24 @@ li::marker {
     right: 0px;
     z-index: 5;
 
-    height: 60px;
+    height: 200px;
     width: 30%;
+    padding-top: 30px;
+    padding-right: 20px;
+
+}
+
+#searchbar-container {
+
+    height: 100%;
+    width: 100%;
 
 }
 
 #searchbar {
 
-    height: 45%;
-    width: 75%;
+    height: 15%;
+    width: 100%;
 
     display: inline-block;
 
@@ -155,9 +164,9 @@ li::marker {
 
 }
 
-#search {
+#search-icon {
 
-    height: 45%;
+    height: 15%;
     width: 10%;
 
     display: flex;
@@ -175,9 +184,23 @@ li::marker {
 
 }
 
+#suggestions {
+
+    max-height: 75%;
+    width: 95%;
+
+    background-color: #FFF;
+
+    border-radius: 0px 0px 10px 10px; 
+    -moz-border-radius: 0px 0px 10px 10px; 
+    -webkit-border-radius: 0px 0px 10px 10px; 
+    border: 0px transparent;
+
+}
+
 #menu-btn {
 
-    height: 90%;
+    height: 15%;
     width: 25%;
 
     color: var(--darker-orange);
