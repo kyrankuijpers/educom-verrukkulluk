@@ -52,7 +52,9 @@
         {% set total_price = 0 %}
 
         {% for product in data %}
-            {% set total_price = total_price + product.price %}
+        
+            {% set product_sum_price = product.qty * product.price %}
+            {% set total_price = total_price + product_sum_price %}
             
             <div id={{"grocerylist#{product.id}"}} class="cart-product d-flex flex-row justify-content-between">
                 
@@ -66,14 +68,14 @@
                 <div class="cart-numbers d-flex justify-content-evenly align-items-start">
                     
                     <div class="cart-qty d-flex justify-content-center align-items-center">
-                        <div class="qty-container d-flex justify-content-center align-items-center">
-                            <p>{{(product.amount_needed / product.content)|round(0, 'ceil')}}</p>     
-                        </div>
+                        <form class="qty-container">
+                            <input class="qty" type="text" data-price="{{product.price}}" data-grocerylist-id="{{product.id}}" value="{{product.qty}}"></input>
+                        </form>
                     </div>
                      
                     <div class="cart-price d-flex justify-content-center align-items-center">
                         <i class="fa-solid fa-euro-sign cart-icon"></i>
-                        <p>{{(product.price/100)|number_format(2, ',', '.')}}</p>
+                        <p class="product-price" id="price-{{product.id}}">{{(product_sum_price/100)|number_format(2, ',', '.')}}</p>
                     </div>
 
                     <div class="cart-icons d-flex justify-content-evenly align-items-center">
@@ -140,7 +142,10 @@ $(".delete-product").on("click", function() {
 
             result.forEach((product) => {
 
-                const price = product['price'] / 100;
+                const price_per_product = (product['price'] / 100);
+                const qty = product['qty'];
+                const price = price_per_product * qty;
+
                 new_total_price = new_total_price + price;
 
             });
@@ -156,6 +161,8 @@ $(".delete-product").on("click", function() {
     });
 
 });
+
+///////////////////////////////// DELETE ALL PRODUCTS IN GROCERYLIST /////////////////////////////////
 
 $("#delete-all").on("click", function() {
 
@@ -173,7 +180,43 @@ $("#delete-all").on("click", function() {
     });
 });
 
-///////////////////////////////// DELETE ALL PRODUCTS IN GROCERYLIST /////////////////////////////////
+///////////////////////////////// CHANGE QUANTITY OF PRODUCT IN GROCERYLIST /////////////////////////////////
+
+$(".qty").on("change", function() {
+     
+    var qty = $(this).val();
+    var grocerylist_id = $(this).attr("data-grocerylist-id");
+    var price_per_product = $(this).attr("data-price");
+
+    $.ajax({
+
+        url: "index.php",
+        method: "GET",
+        dataType: "JSON",
+        data: {"action": "change_qty", "grocerylist_id": grocerylist_id, "qty": qty},
+        success: function(result) {
+            
+            const new_price = (price_per_product * qty) / 100;
+            const new_price_formatted = new_price.toFixed(2).replace(".", ",");
+
+            $(`#price-${grocerylist_id}`).html(`${new_price_formatted}`);
+
+            var new_total_price = 0;
+
+            result.forEach((product) => {
+
+                const price_per_product = (product['price'] / 100);
+                const qty = product['qty'];
+                const price = price_per_product * qty;
+
+                new_total_price = new_total_price + price;
+            });
+
+            const new_total_price_formatted = new_total_price.toFixed(2).replace(".", ",");
+            $("#total-price").html(new_total_price_formatted);
+        }
+    });
+});
 
 </script>
 

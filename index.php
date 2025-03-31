@@ -29,6 +29,7 @@ $recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : "";
 $action = isset($_GET['action']) ? $_GET['action'] : "homepage";
 $grocerylist_id = isset($_GET['grocerylist_id']) ? $_GET['grocerylist_id'] : "";
 $searchstring = isset($_GET['searchstring']) ? $_GET['searchstring'] : "";
+$qty = isset($_GET['qty']) ? $_GET['qty'] : "";
 
 // HARDCODED FOR TESTING //
 $user_id = 1;
@@ -86,6 +87,17 @@ switch($action) {
 
         $result = $grocerylist->deleteGroceryList($user_id);
         break;
+    }
+
+    case "change_qty": {
+
+        $grocerylist->changeQty($grocerylist_id, $qty);
+        $result = $grocerylist->selectGroceryList($user_id);
+       
+        echo json_encode($result);
+
+        break;
+
     }
 
     case "add_to_cart": {

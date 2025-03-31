@@ -66,13 +66,16 @@ class GroceryList {
             if($old_amount > 0) {
 
                 $total_amount = $old_amount + $new_amount;
+                $qty = ceil(($total_amount / $content)); 
 
-                $sql = "UPDATE `grocerylist` SET `amount_needed` = $total_amount WHERE `user_id` = $user_id AND `product_id` = $product_id;";
+                $sql = "UPDATE `grocerylist` SET `amount_needed` = $total_amount, `qty` = $qty WHERE `user_id` = $user_id AND `product_id` = $product_id;";
 
             } else {
                 
-                $sql = "INSERT INTO `grocerylist` (`user_id`, `product_id`, `name`, `descr`, `price`, `unit`, `content`,  `kcal`, `img`, `amount_needed`) 
-                VALUES ($user_id, $product_id, '$name', '$descr', $price, '$unit', $content, $kcal, '$img', $new_amount);";
+                $qty = ceil(($new_amount / $content)); 
+
+                $sql = "INSERT INTO `grocerylist` (`user_id`, `product_id`, `name`, `descr`, `price`, `unit`, `content`,  `kcal`, `img`, `amount_needed`, `qty`) 
+                VALUES ($user_id, $product_id, '$name', '$descr', $price, '$unit', $content, $kcal, '$img', $new_amount, $qty);";
                 
             }
             
@@ -81,6 +84,14 @@ class GroceryList {
             $product_id = 0;
             $old_amount = 0;
         } 
+    }
+
+    public function changeQty($grocerylist_id, $qty) {
+
+        $sql = "UPDATE `grocerylist` SET `qty` = $qty WHERE `id` = '$grocerylist_id';";
+
+        $result = mysqli_query($this->connection, $sql);
+
     }
 
     private function productInGroceryList($product_id, $user_id) {
