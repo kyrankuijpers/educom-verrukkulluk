@@ -18,6 +18,10 @@ class RecipeInfo {
         
         $recipe_info = [];
 
+        /// HARDCODED, LOGGING IN NOT IMPLEMENTED YET
+        $user_id = 1;
+        ///
+
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             
             if($record_type == 'C') {                
@@ -28,6 +32,15 @@ class RecipeInfo {
                 $user_info = $this->getUser($user_id);
 
                 $recipe_info[] = [...$row, ...$user_info];
+            }
+            if($record_type == 'F') {
+                $row_user_id = $row['user_id'];
+                              
+                if($user_id == $row_user_id) {
+
+                    $recipe_info[] = $row;
+
+                }
             }
             else {
                 $recipe_info[] = $row;

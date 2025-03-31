@@ -23,6 +23,7 @@ require_once("lib/grocerylist.php");
 $db = new Database();
 $recipe = new Recipe($db->getConnection());
 $grocerylist = new GroceryList($db->getConnection());
+$recipe_info = new RecipeInfo($db->getConnection());
 
 $recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : "";
 $action = isset($_GET['action']) ? $_GET['action'] : "homepage";
@@ -30,7 +31,7 @@ $grocerylist_id = isset($_GET['grocerylist_id']) ? $_GET['grocerylist_id'] : "";
 $searchstring = isset($_GET['searchstring']) ? $_GET['searchstring'] : "";
 
 // HARDCODED FOR TESTING //
-$user_id = 2;
+$user_id = 1;
 // HARDCODED FOR TESTING //
 
 // Select template depending on transaction
@@ -44,10 +45,10 @@ switch($action) {
     }
 
     case "detail": {
-
         $data = $recipe->selectRecipe($recipe_id)[0];
         $template = "detail.html.twig";
         $title = "detailpagina";
+
         break;
     }
 
@@ -56,7 +57,6 @@ switch($action) {
         $data = [];
         $rating = $_GET["rating"];
 
-        $recipe_info = new RecipeInfo($db->getConnection());
         $new_average = $recipe_info->addRatingAndReturnAverage($recipe_id, $rating);
         $data['new_average'] = $new_average;
         echo json_encode($data);
@@ -74,7 +74,11 @@ switch($action) {
 
     case "delete_product_from_grocerylist": {
 
-        $result = $grocerylist->deleteProductFromGroceryList($grocerylist_id);
+        $grocerylist->deleteProductFromGroceryList($grocerylist_id);
+        $result = $grocerylist->selectGroceryList($user_id);
+        
+        echo json_encode($result);
+
         break;
     }
 
@@ -114,6 +118,20 @@ switch($action) {
         }
         echo $hint;
         break;
+    }
+
+    case "add_favorite": {
+
+        $recipe_info->addFavorite($recipe_id, $user_id);
+        break;
+
+    }
+
+    case "delete_favorite": {
+    
+        $recipe_info->deleteFavorite($recipe_id, $user_id);
+        break;
+
     }
 }
 
