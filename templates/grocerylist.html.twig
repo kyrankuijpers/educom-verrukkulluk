@@ -73,7 +73,7 @@
                      
                     <div class="cart-price d-flex justify-content-center align-items-center">
                         <i class="fa-solid fa-euro-sign cart-icon"></i>
-                        <p>{{(product.price/100)|number_format(2, '.', ',')}}</p>
+                        <p>{{(product.price/100)|number_format(2, ',', '.')}}</p>
                     </div>
 
                     <div class="cart-icons d-flex justify-content-evenly align-items-center">
@@ -106,7 +106,7 @@
             <div>
                 <div class="cart-price d-flex justify-content-center align-items-center">
                     <i class="fa-solid fa-euro-sign cart-icon"></i>
-                    <p id="total-price">{{(total_price/100)|number_format(2, '.', ',')}}</p>
+                    <p id="total-price">{{(total_price/100)|number_format(2, ',', '.')}}</p>
                 </div>
             </div>
 
@@ -122,11 +122,6 @@
 
 <script>
 
-///////////////////////////// (RE)CALCULATE TOTAL PRICE /////////////////////////////////////////
-
-
-
-
 ///////////////////////////// DELETE PRODUCT IN GROCERYLIST /////////////////////////////////////////
 
 $(".delete-product").on("click", function() {
@@ -138,10 +133,25 @@ $(".delete-product").on("click", function() {
         url: "index.php",
         method: "GET",
         data: {"action": "delete_product_from_grocerylist", "grocerylist_id": grocerylist_id},
+        dataType: "JSON",
         success: function(result) {
+            
+            var new_total_price = 0;
+
+            result.forEach((product) => {
+
+                const price = product['price'] / 100;
+                new_total_price = new_total_price + price;
+
+            });
+
+            const new_total_price_formatted = new_total_price.toFixed(2).replace(".", ",");
+
+            $("#total-price").html(new_total_price_formatted);
 
             const grocerylist_row = $(`#grocerylist${grocerylist_id}`);     
             grocerylist_row.remove();
+
         }
     });
 
@@ -154,6 +164,8 @@ $("#delete-all").on("click", function() {
         method: "GET",
         data: {"action": "delete_grocerylist", "user_id": 2},
         success: function(result) {
+
+            $("#total-price").html("0,00");
 
             $(".cart-product").remove();
 

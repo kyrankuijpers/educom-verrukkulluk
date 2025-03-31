@@ -58,7 +58,17 @@
                     
                     <a class="recipe-btn" id="add-cart"><h5>Op lijst</h5></a>
 
-                    <a id="favourite-btn"><i id="favourite-icon" class="fa-regular fa-heart recipe-icon"></i></a>  
+                    {% if data.fav == true %}
+
+                        {% set favorite_class = "fa-solid" %}
+
+                    {% else %}
+
+                        {% set favorite_class = "fa-regular" %}
+
+                    {% endif %}
+
+                    <a id="favourite-btn"><i id="favourite-icon" class="{{favorite_class}} fa-heart recipe-icon"></i></a>  
 
                 </div>           
             </div>       
@@ -238,6 +248,35 @@
                 $("#add-cart").css("background-color", "var(--lighter-green)");
                 $("#add-cart").html("<h4>Toegevoegd</h4>");
 
+            }
+        });
+    });
+
+    /////////////////////////////// ADD OR DELETE FAVOURITE /////////////////////////////////////////////////
+
+    $("#favourite-icon").on("click", function() {
+
+        var favourite_icon = $(this);
+        
+        if($(this).hasClass("fa-solid")) {
+
+            var action = "delete_favorite";
+
+        } else {
+
+            var action = "add_favorite";
+
+        }
+       
+        $.ajax({
+
+            url: "index.php",
+            method: "GET",
+            data: {'action': action, 'recipe_id': {{data.id}}},
+            success: function(result) {
+
+                favourite_icon.toggleClass("fa-solid");
+                favourite_icon.toggleClass("fa-regular");
             }
         });
     });
